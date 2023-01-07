@@ -20,7 +20,8 @@ class MyCMD:
         
     def change_dir(self, new_dir=None) -> None:
         if new_dir is None:
-            self.__change_dir()
+            if self.cur_dir != 'C:/':
+                self.__change_dir()
             return
         try:
             if self.cur_dir[len(self.cur_dir) - 1] != '/':
@@ -71,10 +72,16 @@ class MyCMD:
             
     def rename(self, name, new_name):
         try:
-            print(name, new_name)
-            # os.rename(self.cur_dir + '/' + name, new_name)
+            # print(name, new_name)
+            os.rename(self.cur_dir + '/' + name, new_name)
         except:
             print('No such file or directory')
+            
+    def create_dir(self, name):
+        try:
+            os.mkdir(self.cur_dir + '/' + name)
+        except:
+            print(f'Impossible!\nThere are already exsist file with name "{name}"')
     
     def prettify(self):
         self.cur_dir = self.cur_dir.replace("\ "[0], '/')
